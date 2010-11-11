@@ -59,8 +59,8 @@ Section InstallCARPS
    SetOutpath "$instdir"
    File "carps-0.3.0.gem"
    call InstallDistributedGem
-   CreateShortCut "$DESKTOP\Play CARPS.lnk" "$instdir\$current_gem" "-p"
-   CreateShortCut "$DESKTOP\Host CARPS.lnk" "$instdir\$current_gem" "-m"
+   CreateShortCut "$DESKTOP\Play CARPS.lnk" "carps" "-p"
+   CreateShortCut "$DESKTOP\Host CARPS.lnk" "carps" "-m"
 SectionEnd
 
 ; Now install Fools
