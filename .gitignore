@@ -1,2 +1,3 @@
-.swp
-.*~
+*.swp
+*.*~
+carps_installer.exe
