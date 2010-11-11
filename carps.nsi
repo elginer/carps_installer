@@ -45,16 +45,12 @@ Function InstallDistributedGem
    ExecWait "$gem install -l '$instdir\$current_gem'"
 FunctionEnd
 
-; Install a gem from the internet
-; Write the name of the gem to $current_gem first
-Function InstallGem
-   ExecWait "$gem install $current_gem"
-FunctionEnd
-
 ; Install win32 console
 Section InstallWin32Console
-   StrCpy $current_gem "win32console"
-   call InstallGem
+   StrCpy $current_gem "win32console-1.3.0-x86-mingw32.gem"
+   SetOutpath "$instdir"
+   File "win32console-1.3.0-x86-mingw32.gem"
+   call InstallDistributedGem
 SectionEnd
 
 ; Now install CARPS
