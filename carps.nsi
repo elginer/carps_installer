@@ -31,8 +31,7 @@ Section TestRuby
    SearchPath $gem "gem.bat"
    IfErrors ruby_bad ruby_good
    ruby_bad:
-      MessageBox MB_OK "Installing Ruby failed.$\nDid you forget to 'Add Ruby executables to your PATH'?$\nUninstall Ruby, if possible, and then try to run this installer again.$\nRemember to select that option the next time.$\nPress OK to quit."
-      QUIT
+      Abort "Installing Ruby failed.  Did you forget to 'Add Ruby executables to your PATH'?"
    ruby_good:
 SectionEnd
 
@@ -59,6 +58,8 @@ Section InstallCARPS
    SetOutpath "$instdir"
    File "carps-0.3.0.gem"
    call InstallDistributedGem
+   File "setup_carps.bat"
+   ExecWait "$instdir\setup_carps.bat"
    CreateShortCut "$DESKTOP\Play CARPS.lnk" "carps" "-p"
    CreateShortCut "$DESKTOP\Host CARPS.lnk" "carps" "-m"
 SectionEnd
@@ -69,4 +70,6 @@ Section InstallFools
    SetOutpath "$instdir"
    File "fools-0.0.5.gem"
    call InstallDistributedGem
+   File "setup_fools.bat"
+   ExecWait "$instdir\setup_fools.bat"
 SectionEnd
