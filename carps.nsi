@@ -57,9 +57,9 @@ SectionEnd
 
 ; Now install CARPS
 Section InstallCARPS
-   StrCpy $current_gem "carps-0.3.0.gem"
+   StrCpy $current_gem "carps-0.3.1.gem"
    SetOutpath "$INSTDIR"
-   File "carps-0.3.0.gem"
+   File "carps-0.3.1.gem"
    call InstallDistributedGem
    File "setup_carps.bat"
    ExecWait "$INSTDIR\setup_carps.bat"
