@@ -20,18 +20,13 @@ Section -Prerequisites
    endRuby:
 SectionEnd
 
-; Location of ruby.exe
-Var ruby
-; Location of gem.exe
-Var gem
-
 ; Detect if ruby is successfully installed.
 Section TestRuby
-   SearchPath $ruby "ruby.exe"
-   SearchPath $gem "gem.bat"
+   ExecWait "ruby -e 'exit 0'"
+   ExecWait "gem.bat -h"
    IfErrors ruby_bad ruby_good
    ruby_bad:
-      Abort "Installing Ruby failed.  Did you forget to 'Add Ruby executables to your PATH'?"
+      Abort "Install failed: could not find ruby in PATH."
    ruby_good:
 SectionEnd
 
@@ -41,25 +36,33 @@ SectionEnd
 ; And the output folder
 Var current_gem
 Function InstallDistributedGem
-   ExecWait "$gem install -l '$instdir\$current_gem'"
+   ExecWait "gem.bat install -l '$INSTDIR\$current_gem'"
 FunctionEnd
 
 ; Install win32 console
 Section InstallWin32Console
    StrCpy $current_gem "win32console-1.3.0-x86-mingw32.gem"
-   SetOutpath "$instdir"
+   SetOutpath "$INSTDIR"
    File "win32console-1.3.0-x86-mingw32.gem"
+   call InstallDistributedGem
+SectionEnd
+
+; Install Highline
+Section InstallHighline
+   StrCpy $current_gem "highline-1.6.1.gem"
+   SetOutpath "$INSTDIR"
+   File "highline-1.6.1.gem"
    call InstallDistributedGem
 SectionEnd
 
 ; Now install CARPS
 Section InstallCARPS
    StrCpy $current_gem "carps-0.3.0.gem"
-   SetOutpath "$instdir"
+   SetOutpath "$INSTDIR"
    File "carps-0.3.0.gem"
    call InstallDistributedGem
    File "setup_carps.bat"
-   ExecWait "$instdir\setup_carps.bat"
+   ExecWait "$INSTDIR\setup_carps.bat"
    CreateShortCut "$DESKTOP\Play CARPS.lnk" "carps" "-p"
    CreateShortCut "$DESKTOP\Host CARPS.lnk" "carps" "-m"
 SectionEnd
@@ -67,9 +70,9 @@ SectionEnd
 ; Now install Fools
 Section InstallFools
    StrCpy $current_gem "fools-0.0.5.gem"
-   SetOutpath "$instdir"
+   SetOutpath "$INSTDIR"
    File "fools-0.0.5.gem"
    call InstallDistributedGem
    File "setup_fools.bat"
-   ExecWait "$instdir\setup_fools.bat"
+   ExecWait "$INSTDIR\setup_fools.bat"
 SectionEnd
