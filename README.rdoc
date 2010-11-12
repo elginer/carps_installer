@@ -1,0 +1,16 @@
+== CARPS installer.  Copyright John Morrice 2010
+
+This is the CARPS windows installer source code repository.
+
+To download the compiled installer, go here:
+
+* http://rubyforge.org/frs/download.php/73276/install_carps.exe
+
+
+== Licenses
+
+RubyInstaller is copyright of the RubyInstaller team (of rubyinstaller.org).
+
+highline and win32console gems are distributed under the Ruby License.
+
+carps.nsi, CARPS and Fools are distributed under the GNU general public License.
